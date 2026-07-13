@@ -1,0 +1,69 @@
+{
+  "name": "Headless Agent",
+  "short_name": "Headless",
+  "description": "Autonomous code agent with approval-gated execution",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d0d0d",
+  "theme_color": "#00d4aa",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    { "src": "/icons/icon-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-152.png", "sizes": "152x152", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/desktop.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "Desktop dashboard" },
+    { "src": "/screenshots/mobile.png", "sizes": "750x1334", "type": "image/png", "form_factor": "narrow", "label": "Mobile view" }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Task",
+      "short_name": "Task",
+      "description": "Create a new agent task",
+      "url": "/tasks/new",
+      "icons": [{ "src": "/icons/shortcut-task.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "History",
+      "short_name": "History",
+      "description": "View execution history",
+      "url": "/history",
+      "icons": [{ "src": "/icons/shortcut-history.png", "sizes": "96x96" }]
+    }
+  ],
+  "protocol_handlers": [
+    { "protocol": "web+headless", "url": "/tasks/new?data=%s" }
+  ],
+  "file_handlers": [
+    {
+      "action": "/tasks/import",
+      "accept": { "application/json": [".json", ".task"] },
+      "icons": [{ "src": "/icons/file-task.png", "sizes": "256x256" }]
+    }
+  ],
+  "share_target": {
+    "action": "/tasks/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "name",
+      "text": "description",
+      "url": "url",
+      "files": [{ "name": "attachments", "accept": ["application/json", "text/*"] }]
+    }
+  },
+  "edge_side_panel": { "preferred_width": 400 },
+  "launch_handler": { "client_mode": "focus-existing" },
+  "related_applications": [],
+  "prefer_related_applications": false
+}

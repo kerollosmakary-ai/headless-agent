@@ -1,0 +1,14 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+websockets==13.1
+pydantic==2.7.4
+pydantic-settings==2.3.3
+redis==5.0.3
+python-multipart==0.0.9
+jinja2==3.1.4
+aiofiles==23.2.1
+httpx==0.27.0
+python-dotenv==1.0.1
+structlog==24.1.0
+prometheus-client==0.19.0
+opencode @ git+https://github.com/opencode-ai/opencode.git  # or pip install opencode if published

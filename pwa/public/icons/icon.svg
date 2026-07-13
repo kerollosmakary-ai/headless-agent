@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <!-- Circuit board pattern -->
+  <g fill="none" stroke="#0ea5e9" stroke-width="4" stroke-linecap="round">
+    <path d="M128 192h128M256 192h128M128 256h128M256 256h128M128 320h128M256 320h128"/>
+    <path d="M192 128v128M320 128v128M192 384v128M320 384v128"/>
+  </g>
+  <!-- Central chip -->
+  <rect x="192" y="192" width="128" height="128" rx="16" fill="#1e293b" stroke="#0ea5e9" stroke-width="6"/>
+  <rect x="212" y="212" width="88" height="88" rx="8" fill="#0f172a"/>
+  <!-- Pins -->
+  <g stroke="#22d3ee" stroke-width="3" stroke-linecap="round">
+    <path d="M192 224h-16M192 256h-16M192 288h-16M192 320h-16"/>
+    <path d="M320 224h16M320 256h16M320 288h16M320 320h16"/>
+    <path d="M224 192v-16M256 192v-16M288 192v-16"/>
+    <path d="M224 320v16M256 320v16M288 320v16"/>
+  </g>
+  <!-- Approval badge -->
+  <circle cx="384" cy="128" r="48" fill="#10b981"/>
+  <path d="M360 128l16 16 32-32" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,82 @@
+{
+  "name": "headless-agent-swarm",
+  "type": "docker-compose",
+  "description": "Headless Code Agent Swarm with PWA Dashboard",
+  "repository": "https://github.com/${{ github.repository }}",
+  "branch": "main",
+  "buildPack": "dockerfile",
+  "dockerfile": "Dockerfile",
+  "dockerCompose": "docker-compose.yml",
+  "port": 8000,
+  "environmentVariables": [
+    {
+      "key": "REDIS_URL",
+      "value": "redis://redis:6379/0",
+      "isBuildTime": false,
+      "isPreview": false
+    },
+    {
+      "key": "LOG_LEVEL",
+      "value": "INFO",
+      "isBuildTime": false,
+      "isPreview": false
+    },
+    {
+      "key": "MAX_CONCURRENT_TASKS",
+      "value": "10",
+      "isBuildTime": false,
+      "isPreview": false
+    },
+    {
+      "key": "OPENAI_API_KEY",
+      "value": "",
+      "isBuildTime": false,
+      "isPreview": false,
+      "isSecret": true
+    },
+    {
+      "key": "ANTHROPIC_API_KEY",
+      "value": "",
+      "isBuildTime": false,
+      "isPreview": false,
+      "isSecret": true
+    },
+    {
+      "key": "GRAFANA_PASSWORD",
+      "value": "",
+      "isBuildTime": false,
+      "isPreview": false,
+      "isSecret": true
+    }
+  ],
+  "volumes": [
+    {
+      "name": "workspace",
+      "mountPath": "/workspace"
+    },
+    {
+      "name": "redis_data",
+      "mountPath": "/data"
+    }
+  ],
+  "healthCheck": {
+    "path": "/health",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "resources": {
+    "cpu": 1000,
+    "memory": 512
+  },
+  "domains": [
+    {
+      "domain": "headless.yourdomain.com",
+      "isRedirect": false
+    }
+  ],
+  "preview": {
+    "enabled": true,
+    "subdomain": "headless-preview"
+  }
+}
