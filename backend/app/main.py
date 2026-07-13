@@ -22,6 +22,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, ConfigDict
 from pydantic_settings import BaseSettings
 import redis.asyncio as redis
+import logging
 import structlog
 from prometheus_client import Counter, Histogram, Gauge, generate_latest
 
@@ -41,7 +42,7 @@ class Settings(BaseSettings):
 
 settings = Settings()
 structlog.configure(
-    wrapper_class=structlog.make_filtering_bound_logger(settings.log_level),
+    wrapper_class=structlog.make_filtering_bound_logger(int(settings.log_level) if isinstance(settings.log_level, str) and settings.log_level.isdigit() else getattr(logging, settings.log_level.upper(), 20)),
     processors=[structlog.processors.JSONRenderer()]
 )
 log = structlog.get_logger()
