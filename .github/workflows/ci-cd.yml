@@ -127,25 +127,27 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    env:
+      COOLIFY_WEBHOOK_URL: ${{ secrets.COOLIFY_WEBHOOK_URL }}
+      COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+      COOLIFY_API_URL: ${{ secrets.COOLIFY_API_URL }}
+      COOLIFY_APP_ID: ${{ secrets.COOLIFY_APP_ID }}
     steps:
       - name: Trigger Coolify Deploy
-        if: ${{ secrets.COOLIFY_WEBHOOK_URL != '' }}
+        if: ${{ env.COOLIFY_WEBHOOK_URL != '' }}
         run: |
-          curl -X POST "${{ secrets.COOLIFY_WEBHOOK_URL }}" \
+          curl -X POST "${{ env.COOLIFY_WEBHOOK_URL }}" \
             -H "Content-Type: application/json" \
             -d '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
-        env:
-          COOLIFY_WEBHOOK_URL: ${{ secrets.COOLIFY_WEBHOOK_URL }}
 
       - name: Deploy via Coolify API (alternative)
-        if: ${{ secrets.COOLIFY_API_TOKEN != '' && secrets.COOLIFY_API_URL != '' }}
+        if: ${{ env.COOLIFY_API_TOKEN != '' && env.COOLIFY_API_URL != '' }}
         run: |
-          curl -X POST "${{ secrets.COOLIFY_API_URL }}/applications/${{ secrets.COOLIFY_APP_ID }}/deploy" \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_API_TOKEN }}" \
+          curl -X POST "${{ env.COOLIFY_API_URL }}/applications/${{ env.COOLIFY_APP_ID }}/deploy" \
+            -H "Authorization: Bearer ${{ env.COOLIFY_API_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{"force": true}'
 
-  # ═══════════════════════════════════════════════
   # Release
   # ═══════════════════════════════════════════════
   release:
