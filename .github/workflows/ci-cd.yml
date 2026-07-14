@@ -143,8 +143,7 @@ jobs:
       - name: Deploy via Coolify API (alternative)
         if: ${{ env.COOLIFY_API_TOKEN != '' && env.COOLIFY_API_URL != '' }}
         run: |
-          AUTH_PREFIX='Bearer'
-          AUTH_HEADER="${AUTH_PREFIX} ${COOLIFY_API_TOKEN}"
+          AUTH_HEADER="$(printf '%s %s' 'Bearer' "${COOLIFY_API_TOKEN}")"
           curl -X POST "${{ env.COOLIFY_API_URL }}/applications/${{ env.COOLIFY_APP_ID }}/deploy" \
             -H "Authorization: ${AUTH_HEADER}" \
             -H "Content-Type: application/json" \
